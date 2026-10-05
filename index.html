@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waasz — SME AI Business Analyst on WhatsApp</title>
+  <meta name="description" content="Waasz is an SME AI Business Analyst inside WhatsApp. Text, send voice notes, or snap photos of your sales notes and receipts in English or Pidgin. Logs sales, tracks debts, and generates PDF receipts." />
+  
+  <!-- Favicon Set -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+
+  <!-- Fonts: Newsreader (Editorial Serif for Headlines) + DM Sans (Clean Modern Sans for Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* -------------------------------------------------------------
+       DESIGN SYSTEM CONSTANTS
+       - Single Accent: Deep Terracotta (#C2410C)
+       - Light, clean background (#FAFAF9 / #FFFFFF)
+       - Ink text: #18181B / Slate #52525B
+       - No purple gradients, no multi-color badges, no AI slop
+       ------------------------------------------------------------- */
+    :root {
+      --bg-page: #FAFAF9;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F4F4F5;
+      --text-main: #18181B;
+      --text-muted: #52525B;
+      --text-subtle: #71717A;
+      --border-light: #E4E4E7;
+      --border-strong: #D4D4D8;
+      
+      /* The ONE accent color */
+      --accent: #C2410C;
+      --accent-hover: #9A3412;
+      --accent-soft: #FFF7ED;
+      --accent-border: #FFEDD5;
+
+      /* WhatsApp Mockup Native Light Palettes */
+      --wa-chat-bg: #EFEAE2;
+      --wa-header-bg: #075E54;
+      --wa-received-bg: #FFFFFF;
+      --wa-sent-bg: #E7FFDB;
+      --wa-bubble-text: #111B21;
+      --wa-meta-text: #667781;
+      --wa-check-blue: #53BDEB;
+      --wa-voice-green: #00A884;
+
+      --font-headline: 'Newsreader', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --container-max: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--text-main);
+      font-weight: 500;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+    }
+
+    strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* LAYOUT */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-divider {
+      border: 0;
+      height: 1px;
+      background: var(--border-light);
+      margin: 0;
+    }
+
+    /* HEADER & NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 250, 249, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 1rem 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      height: 34px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-family: var(--font-headline);
+      font-size: 1.65rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .beta-tag {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.55rem;
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+    }
+
+    /* THE ONE CTA BUTTON STYLE */
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background-color: var(--accent);
+      color: #FFFFFF !important;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      padding: 0.85rem 1.6rem;
+      border-radius: 6px;
+      border: 1px solid var(--accent);
+      transition: background-color 0.15s ease, transform 0.1s ease;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .cta-button:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .cta-button:active {
+      transform: translateY(1px);
+    }
+
+    .cta-button.nav-cta {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.875rem;
+    }
+
+    .cta-button.large {
+      padding: 1.05rem 2rem;
+      font-size: 1.125rem;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .cta-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      padding: 4.5rem 0 3.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1.1fr 1fr;
+        gap: 3.5rem;
+      }
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .hero-tagline {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-headline {
+      font-size: 2.5rem;
+      line-height: 1.15;
+      color: var(--text-main);
+    }
+
+    @media (min-width: 640px) {
+      .hero-headline {
+        font-size: 3.25rem;
+      }
+    }
+
+    .hero-subhead {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .voice-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 0.35rem 0.65rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      color: var(--text-main);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .cta-microcopy {
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+    }
+
+    /* -------------------------------------------------------------
+       REALISTIC CSS WHATSAPP CHAT MOCKUP & INTERACTIVE TABS
+       ------------------------------------------------------------- */
+    .wa-mockup-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
+    }
+
+    .mockup-tab-selector {
+      display: flex;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.35rem;
+      scrollbar-width: thin;
+    }
+
+    .mockup-tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      padding: 0.4rem 0.7rem;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .mockup-tab-btn.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    .wa-phone-frame {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      box-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wa-app-header {
+      background-color: var(--wa-header-bg);
+      color: #FFFFFF;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .wa-avatar {
+      width: 38px;
+      height: 38px;
+      background: #FFFFFF;
+      color: var(--wa-header-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      font-family: var(--font-headline);
+      flex-shrink: 0;
+    }
+
+    .wa-header-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .wa-contact-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .wa-verified-badge {
+      width: 14px;
+      height: 14px;
+      fill: #25D366;
+    }
+
+    .wa-status {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .wa-chat-body {
+      background-color: var(--wa-chat-bg);
+      background-image: radial-gradient(#d3cbbe 0.75px, transparent 0.75px);
+      background-size: 12px 12px;
+      padding: 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      font-size: 0.875rem;
+      min-height: 480px;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .wa-date-pill {
+      align-self: center;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--wa-meta-text);
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+      margin-bottom: 0.25rem;
+    }
+
+    .wa-bubble {
+      max-width: 90%;
+      padding: 0.6rem 0.75rem;
+      border-radius: 8px;
+      position: relative;
+      line-height: 1.4;
+      color: var(--wa-bubble-text);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+      word-break: break-word;
+    }
+
+    .wa-bubble.sent {
+      align-self: flex-end;
+      background-color: var(--wa-sent-bg);
+      border-top-right-radius: 2px;
+    }
+
+    .wa-bubble.received {
+      align-self: flex-start;
+      background-color: var(--wa-received-bg);
+      border-top-left-radius: 2px;
+    }
+
+    .wa-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      float: right;
+      font-size: 0.68rem;
+      color: var(--wa-meta-text);
+      margin-left: 0.6rem;
+      margin-top: 0.35rem;
+    }
+
+    .wa-ticks {
+      width: 13px;
+      height: 13px;
+      fill: var(--wa-check-blue);
+    }
+
+    /* Voice Note Bubble Simulation */
+    .wa-voice-player {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.25rem 0;
+    }
+
+    .wa-play-btn {
+      width: 32px;
+      height: 32px;
+      background: var(--wa-voice-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .wa-waveform {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      height: 20px;
+    }
+
+    .wa-wave-bar {
+      width: 2px;
+      background: #8696A0;
+      border-radius: 1px;
+    }
+
+    .wa-voice-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--wa-meta-text);
+      margin-top: 2px;
+    }
+
+    /* Photo Upload Mockup inside WhatsApp */
+    .wa-photo-card {
+      background: #FFFFFF;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #CBD5E1;
+      margin-bottom: 0.35rem;
+    }
+
+    .wa-photo-preview {
+      background: #F1F5F9;
+      height: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      color: #475569;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .wa-photo-caption {
+      padding: 0.4rem 0.5rem;
+      font-size: 0.78rem;
+      color: #1E293B;
+    }
+
+    /* WhatsApp Styled Structured Cards */
+    .wa-entry-card {
+      margin-top: 0.4rem;
+      padding: 0.55rem;
+      background: #F8FAFC;
+      border-left: 3px solid #00A884;
+      border-radius: 4px;
+      font-size: 0.8125rem;
+    }
+
+    .wa-entry-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+
+    .wa-entry-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .wa-entry-label {
+      color: #64748B;
+    }
+
+    .wa-entry-val {
+      font-weight: 600;
+      color: #0F172A;
+    }
+
+    .wa-receipt-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.5rem;
+      padding: 0.35rem 0.6rem;
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #0F172A;
+    }
+
+    /* Mini SVG Trend Line Chart in Chat Bubble */
+    .wa-chat-chart {
+      margin-top: 0.5rem;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 0.6rem;
+    }
+
+    .chart-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #1E293B;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Tab Panels for Chat Simulation */
+    .chat-panel {
+      display: none;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .chat-panel.active {
+      display: flex;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 2: THE WHY
+       ------------------------------------------------------------- */
+    .why-section {
+      padding: 4.5rem 0;
+      background: var(--bg-surface);
+    }
+
+    .editorial-container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-size: 2.1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.25;
+    }
+
+    .editorial-p {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+      color: #3F3F46;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 3: COMPLETE CAPABILITY CATALOG (9 DOMAINS)
+       ------------------------------------------------------------- */
+    .capabilities-section {
+      padding: 5rem 0;
+      background: var(--bg-page);
+    }
+
+    .cap-grid-full {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .cap-grid-full {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .cap-grid-full {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .domain-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.15s ease;
+    }
+
+    .domain-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .domain-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 0.75rem;
+    }
+
+    .domain-num {
+      font-family: var(--font-headline);
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .domain-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+    }
+
+    .domain-title {
+      font-family: var(--font-headline);
+      font-size: 1.35rem;
+      color: var(--text-main);
+      line-height: 1.25;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .feature-list li {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 1.1rem;
+    }
+
+    .feature-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .feature-list li strong {
+      color: var(--text-main);
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 4: HOW IT WORKS (3 SIMPLE STEPS)
+       ------------------------------------------------------------- */
+    .how-section {
+      padding: 4.5rem 0;
+      background: var(--bg-surface);
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      max-width: 760px;
+    }
+
+    .step-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .step-marker {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-headline);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--bg-page);
+    }
+
+    .step-content h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .step-content p {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 5: WHO IT'S FOR
+       ------------------------------------------------------------- */
+    .audience-section {
+      padding: 4.5rem 0;
+    }
+
+    .audience-box {
+      border-left: 3px solid var(--accent);
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 2.25rem 2rem;
+      border-radius: 0 6px 6px 0;
+      max-width: 800px;
+      margin: 2rem 0;
+    }
+
+    .audience-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .audience-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    .bullet-dash {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 6: CURRENT STATUS (HONEST PRIVATE BETA)
+       ------------------------------------------------------------- */
+    .status-section {
+      padding: 3.5rem 0;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .status-box {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .status-badge-inline {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    /* GOOGLE FORM TESTING BUTTON */
+    .form-beta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      padding: 0.85rem 1.6rem;
+      border-radius: 6px;
+      border: 1.5px solid var(--border-strong);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    .form-beta-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background-color: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    .form-beta-btn:active {
+      transform: translateY(0);
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 7: FINAL CTA REPEAT
+       ------------------------------------------------------------- */
+    .cta-repeat-section {
+      padding: 5.5rem 0;
+      text-align: center;
+      background: var(--bg-surface);
+    }
+
+    .cta-repeat-content {
+      max-width: 620px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 8: FOOTER
+       ------------------------------------------------------------- */
+    footer {
+      padding: 2.5rem 0;
+      background: var(--bg-page);
+      border-top: 1px solid var(--border-light);
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 640px) {
+      .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    .footer-disclaimer {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      max-width: 480px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER / NAV
+       ============================================================ -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-group" aria-label="Waasz Home">
+        <img src="assets/waasz-logo.png" alt="Waasz Logo" class="brand-logo-img" width="27" height="34" />
+        <span class="brand-name">Waasz</span>
+        <span class="beta-tag">Private Beta</span>
+      </a>
+
+      <!-- The single target CTA link -->
+      <a 
+        href="https://wa.me/2349044765496?text=Hi%2C%20I%27d%20like%20to%20try%20Waasz" 
+        class="cta-button nav-cta"
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.74 2.66 4.22 3.73.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
+        </svg>
+        <span>Open in WhatsApp</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         1. HERO SECTION
+         ============================================================ -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Left: Concrete Copy & Primary CTA -->
+          <div class="hero-copy">
+            <span class="hero-tagline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+              SME AI Business Analyst on WhatsApp
+            </span>
+            <h1 class="hero-headline">
+              Keep track of every sale, debt, and kobo without opening another app.
+            </h1>
+            <p class="hero-subhead">
+              Waasz lives inside WhatsApp. Text, send voice notes, or <strong>snap photos</strong> of your handwritten sales book, POS receipts, or supplier invoices. Waasz analyzes your inputs in English or Nigerian Pidgin, logs records, manages debts, and calculates real profit.
+            </p>
+
+            <div class="hero-badge-row">
+              <div class="voice-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                  <line x1="12" y1="19" x2="12" y2="23"></line>
+                  <line x1="8" y1="23" x2="16" y2="23"></line>
+                </svg>
+                Voice Note Enabled
+              </div>
+              <div class="voice-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                Photo & Receipt Scanning
+              </div>
+              <div class="voice-badge">
+                <span>🇳🇬</span>
+                Pidgin & English Native
+              </div>
+              <div class="voice-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                PDF Invoices & Receipts
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a 
+                href="https://wa.me/2349044765496?text=Hi%2C%20I%27d%20like%20to%20try%20Waasz" 
+                class="cta-button large"
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.74 2.66 4.22 3.73.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
+                </svg>
+                <span>Chat with Waasz on WhatsApp</span>
+              </a>
+              <span class="cta-microcopy">
+                Direct on WhatsApp (+234 904 476 5496). Or <a href="https://forms.gle/RNQUMacZvPzQe9L89" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 600; text-decoration: underline;">apply to join the testing phase &rarr;</a>
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: Signature Visual (Animated / Interactive WhatsApp Product Experience) -->
+          <div class="wa-mockup-wrapper" aria-label="Waasz WhatsApp Interactive Demo">
+            
+            <!-- Tab Selector to switch live realistic scenarios -->
+            <div class="mockup-tab-selector" role="tablist">
+              <button class="mockup-tab-btn active" onclick="switchMockupTab(0)" role="tab" aria-selected="true">🎙️ Voice Note</button>
+              <button class="mockup-tab-btn" onclick="switchMockupTab(1)" role="tab" aria-selected="false">📸 Snap Photo</button>
+              <button class="mockup-tab-btn" onclick="switchMockupTab(2)" role="tab" aria-selected="false">📊 Sunday Report & Chart</button>
+              <button class="mockup-tab-btn" onclick="switchMockupTab(3)" role="tab" aria-selected="false">💳 Debt Ledger</button>
+              <button class="mockup-tab-btn" onclick="switchMockupTab(4)" role="tab" aria-selected="false">📈 Live Rates</button>
+            </div>
+
+            <div class="wa-phone-frame">
+              <!-- WhatsApp Header -->
+              <div class="wa-app-header">
+                <div class="wa-avatar">W</div>
+                <div class="wa-header-info">
+                  <div class="wa-contact-name">
+                    <span>Waasz AI</span>
+                    <svg class="wa-verified-badge" viewBox="0 0 24 24" aria-label="Verified">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <div class="wa-status">Official Business Account</div>
+                </div>
+              </div>
+
+              <!-- WhatsApp Chat Screen with Tabbed Real Flows -->
+              <div class="wa-chat-body">
+                <div class="wa-date-pill">TODAY</div>
+
+                <!-- TAB 0: VOICE NOTE & PIDGIN SALES LOGGING -->
+                <div id="tab-0" class="chat-panel active">
+                  <div class="wa-bubble sent">
+                    <div class="wa-voice-player">
+                      <div class="wa-play-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                      </div>
+                      <div class="wa-waveform">
+                        <div class="wa-wave-bar" style="height: 6px;"></div>
+                        <div class="wa-wave-bar" style="height: 14px;"></div>
+                        <div class="wa-wave-bar" style="height: 18px;"></div>
+                        <div class="wa-wave-bar" style="height: 10px;"></div>
+                        <div class="wa-wave-bar" style="height: 16px;"></div>
+                        <div class="wa-wave-bar" style="height: 8px;"></div>
+                        <div class="wa-wave-bar" style="height: 12px;"></div>
+                        <div class="wa-wave-bar" style="height: 15px;"></div>
+                        <div class="wa-wave-bar" style="height: 5px;"></div>
+                        <div class="wa-wave-bar" style="height: 11px;"></div>
+                        <div class="wa-wave-bar" style="height: 17px;"></div>
+                        <div class="wa-wave-bar" style="height: 7px;"></div>
+                      </div>
+                    </div>
+                    <div class="wa-voice-meta">
+                      <span>0:08 (Voice Note)</span>
+                    </div>
+                    <div style="font-size: 0.8rem; margin-top: 4px; color: #475569; font-style: italic;">
+                      "I just sell 3 bags of rice for 40,000 each via bank transfer and pay 5,000 for dispatch"
+                    </div>
+                    <span class="wa-time">
+                      10:14 AM
+                      <svg class="wa-ticks" viewBox="0 0 16 15">
+                        <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <div class="wa-bubble received">
+                    <div><strong>Recorded Voice Note Entry:</strong></div>
+                    <div class="wa-entry-card">
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">Sale (3x Rice @ ₦40,000)</span>
+                        <span class="wa-entry-val">₦120,000 (Transfer)</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">Expense (Dispatch Rider)</span>
+                        <span class="wa-entry-val">₦5,000</span>
+                      </div>
+                      <div class="wa-entry-row" style="margin-top: 4px; border-top: 1px dashed #CBD5E1; padding-top: 4px;">
+                        <span class="wa-entry-label">Net Cash Added</span>
+                        <span class="wa-entry-val" style="color: #00A884;">+₦115,000</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">Rice Stock Updated</span>
+                        <span class="wa-entry-val">17 bags remaining</span>
+                      </div>
+                    </div>
+                    <span class="wa-time">10:14 AM</span>
+                  </div>
+                </div>
+
+                <!-- TAB 1: PHOTO / RECEIPT SCAN & ANALYSIS -->
+                <div id="tab-1" class="chat-panel">
+                  <div class="wa-bubble sent">
+                    <div class="wa-photo-card">
+                      <div class="wa-photo-preview">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                          <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <span style="font-size: 0.72rem; font-weight: 600;">[Photo: Daily Sales Notebook Page]</span>
+                      </div>
+                      <div class="wa-photo-caption">
+                        "I just snap today's sales from my book, record everything"
+                      </div>
+                    </div>
+                    <span class="wa-time">
+                      18:45 PM
+                      <svg class="wa-ticks" viewBox="0 0 16 15">
+                        <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <div class="wa-bubble received">
+                    <div>📸 <strong>Photo Analyzed & Parsed:</strong></div>
+                    <div style="font-size: 0.78rem; color: #475569; margin-top: 2px;">
+                      Extracted 3 sales entries & 1 restock from notebook image:
+                    </div>
+                    <div class="wa-entry-card">
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">2x Indomie Carton (Cash)</span>
+                        <span class="wa-entry-val">₦17,000</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">1x 50kg Flour (Transfer)</span>
+                        <span class="wa-entry-val">₦68,000</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">5x Gino Pepper (POS)</span>
+                        <span class="wa-entry-val">₦3,500</span>
+                      </div>
+                      <div class="wa-entry-row" style="margin-top: 4px; border-top: 1px dashed #CBD5E1; padding-top: 4px;">
+                        <span class="wa-entry-label">Restock: 10pk Sugar</span>
+                        <span class="wa-entry-val" style="color: #64748B;">Cost: ₦22,000</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">Total Daily Sales Logged</span>
+                        <span class="wa-entry-val" style="color: #00A884;">₦88,500</span>
+                      </div>
+                    </div>
+                    <span class="wa-time">18:45 PM</span>
+                  </div>
+                </div>
+
+                <!-- TAB 2: SUNDAY REPORT & TREND CHART (FROM REAL WHATSAPP SCREENSHOTS) -->
+                <div id="tab-2" class="chat-panel">
+                  <div class="wa-bubble received">
+                    <div>📊 <strong>Weekly Highlights</strong></div>
+                    <div style="font-size: 0.8125rem; margin-top: 4px; line-height: 1.5;">
+                      • Total sales recorded: <strong>NGN 350,000</strong><br />
+                      • Total expense recorded: <strong>NGN 10,100</strong><br />
+                      • Net revenue: <strong>NGN 339,900</strong><br />
+                      • Sales transactions: <strong>6</strong><br />
+                      • Top-selling product: <strong>Rice (NGN 270,000)</strong>
+                    </div>
+
+                    <div class="wa-chat-chart">
+                      <div class="chart-title">Weekly Performance (Last 7 Days)</div>
+                      <svg viewBox="0 0 280 90" width="100%" height="90">
+                        <!-- Grid lines -->
+                        <line x1="30" y1="20" x2="270" y2="20" stroke="#F1F5F9" stroke-width="1" />
+                        <line x1="30" y1="50" x2="270" y2="50" stroke="#F1F5F9" stroke-width="1" />
+                        <line x1="30" y1="75" x2="270" y2="75" stroke="#E2E8F0" stroke-width="1" />
+                        
+                        <!-- Axis Labels -->
+                        <text x="32" y="85" font-size="8" fill="#94A3B8">Mon</text>
+                        <text x="75" y="85" font-size="8" fill="#94A3B8">Tue</text>
+                        <text x="115" y="85" font-size="8" fill="#94A3B8">Wed</text>
+                        <text x="155" y="85" font-size="8" fill="#94A3B8">Thu</text>
+                        <text x="195" y="85" font-size="8" fill="#00A884" font-weight="bold">Fri</text>
+                        <text x="235" y="85" font-size="8" fill="#94A3B8">Sat</text>
+                        
+                        <!-- Sales Line (Green) -->
+                        <polyline fill="none" stroke="#00A884" stroke-width="2.5" points="35,75 75,75 115,75 155,75 195,15 235,65 265,72" />
+                        <!-- Expense Line (Red) -->
+                        <polyline fill="none" stroke="#EF4444" stroke-width="1.5" points="35,75 75,75 115,75 155,75 195,74 235,74 265,70" />
+                        <circle cx="195" cy="15" r="3.5" fill="#00A884" />
+                      </svg>
+                      <div style="display: flex; gap: 0.8rem; font-size: 0.68rem; margin-top: 2px;">
+                        <span style="color: #00A884;">● Sales (₦350k)</span>
+                        <span style="color: #EF4444;">● Expenses (₦10.1k)</span>
+                      </div>
+                    </div>
+
+                    <div style="margin-top: 6px; font-size: 0.78rem; color: #475569;">
+                      💡 <strong>Concrete Suggestion:</strong> Rice drives 77% of revenue. Set a weekly target of NGN 300,000 for next cycle.
+                    </div>
+
+                    <span class="wa-time">21:00 PM</span>
+                  </div>
+                </div>
+
+                <!-- TAB 3: CREDIT DEBT & PDF RECEIPT -->
+                <div id="tab-3" class="chat-panel">
+                  <div class="wa-bubble sent">
+                    Who owes me money right now?
+                    <span class="wa-time">
+                      14:02 PM
+                      <svg class="wa-ticks" viewBox="0 0 16 15">
+                        <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <div class="wa-bubble received">
+                    <div><strong>Outstanding Customer Debts (Total: ₦145,000):</strong></div>
+                    <div class="wa-entry-card">
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">1. Emeka (Balogun St)</span>
+                        <span class="wa-entry-val" style="color: #C2410C;">₦65,000</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">2. Alhaji Danladi</span>
+                        <span class="wa-entry-val" style="color: #C2410C;">₦50,000</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">3. Mama Tobi</span>
+                        <span class="wa-entry-val" style="color: #C2410C;">₦30,000</span>
+                      </div>
+                    </div>
+
+                    <div style="font-size: 0.75rem; margin-top: 6px; background: #FFFBEB; padding: 5px; border-radius: 4px; border: 1px solid #FDE68A;">
+                      🔒 <strong>Privacy Guardrail:</strong> Waasz never messages your debtors directly. Ready-to-forward reminder draft prepared for Emeka.
+                    </div>
+
+                    <div class="wa-receipt-badge">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                      </svg>
+                      Receipt_INV-0428.pdf (Delivered)
+                    </div>
+
+                    <span class="wa-time">14:02 PM</span>
+                  </div>
+                </div>
+
+                <!-- TAB 4: LIVE MARKET FX & INTELLIGENCE -->
+                <div id="tab-4" class="chat-panel">
+                  <div class="wa-bubble sent">
+                    What is the parallel market dollar rate today?
+                    <span class="wa-time">
+                      09:30 AM
+                      <svg class="wa-ticks" viewBox="0 0 16 15">
+                        <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <div class="wa-bubble received">
+                    <div><strong>Live FX Market Update:</strong></div>
+                    <div class="wa-entry-card">
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">USD / NGN (Parallel)</span>
+                        <span class="wa-entry-val">₦1,640 - ₦1,655</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">GBP / NGN</span>
+                        <span class="wa-entry-val">₦2,110</span>
+                      </div>
+                      <div class="wa-entry-row">
+                        <span class="wa-entry-label">EUR / NGN</span>
+                        <span class="wa-entry-val">₦1,780</span>
+                      </div>
+                    </div>
+                    <div style="font-size: 0.72rem; color: #64748B; margin-top: 4px;">
+                      Source: Real-time search grounding.
+                    </div>
+                    <span class="wa-time">09:30 AM</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ============================================================
+         2. WHY SECTION
+         ============================================================ -->
+    <section class="why-section">
+      <div class="container">
+        <div class="editorial-container">
+          <div class="section-label">The Core Reality</div>
+          <h2 class="section-heading">
+            Business owners don't skip bookkeeping out of laziness.
+          </h2>
+          <p class="editorial-p">
+            Traditional bookkeeping software fails because it forces you to stop what you are doing, open a separate app, log into a dashboard, and fill out endless form fields. In the middle of serving three customers in a bustling shop, that simply never happens.
+          </p>
+          <p class="editorial-p">
+            Waasz eliminates behavioral friction completely. Whether you type a short message, drop a 5-second voice note in Pidgin, or simply <strong>snap a photo of your handwritten sales book or POS slip</strong> at the end of the day, your books, debt balances, and inventory stay 100% accurate in real time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ============================================================
+         3. COMPLETE CAPABILITIES CATALOG (ALL 9 DOMAINS)
+         ============================================================ -->
+    <section class="capabilities-section">
+      <div class="container">
+        <div class="editorial-container" style="text-align: center; margin-bottom: 1.5rem;">
+          <div class="section-label">Comprehensive Functional Catalog</div>
+          <h2 class="section-heading">Engineered for Every Aspect of SME Operations</h2>
+          <p>Everything Waasz can do inside your WhatsApp thread — text, voice, image understanding, and financial analytics.</p>
+        </div>
+
+        <div class="cap-grid-full">
+          
+          <!-- DOMAIN 1 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">01</span>
+              <span class="domain-tag">Bookkeeping</span>
+            </div>
+            <h3 class="domain-title">Daily Sales & Expense Bookkeeping</h3>
+            <ul class="feature-list">
+              <li><strong>Multimodal Logging (Text, Voice, Photo):</strong> Text, speak in English/Pidgin, or snap photos of handwritten notebooks and POS printouts.</li>
+              <li><strong>Multi-Item & Payment Parsing:</strong> Automatically splits complex sales and records Cash, Bank Transfer, POS, or Credit.</li>
+              <li><strong>Conversational Corrections:</strong> Make instant edits (e.g. <em>"Change last fuel expense to ₦4,000"</em>).</li>
+              <li><strong>Audit Trail & Soft Deletions:</strong> Preserves an immutable log of changes for accountant-grade reliability.</li>
+            </ul>
+          </div>
+
+          <!-- DOMAIN 2 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">02</span>
+              <span class="domain-tag">Inventory</span>
+            </div>
+            <h3 class="domain-title">Inventory & Stock Management</h3>
+            <ul class="feature-list">
+              <li><strong>Waybill & Stock Photo Scanning:</strong> Snap supplier waybills or delivery invoices to record restocks and unit costs in one step.</li>
+              <li><strong>Automated Stock Deduction:</strong> Decrements quantities automatically whenever a sale is logged.</li>
+              <li><strong>Low-Stock Proactive Alerts:</strong> Alerts you before critical goods run out of stock.</li>
+              <li><strong>Spoilage & Write-offs:</strong> Record returns, shrinkage, or damaged goods with reason notes.</li>
+            </ul>
+          </div>
+
+          <!-- DOMAIN 3 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">03</span>
+              <span class="domain-tag">Debtors</span>
+            </div>
+            <h3 class="domain-title">Debt Tracking & Credit Management</h3>
+            <ul class="feature-list">
+              <li><strong>Debtor Balances on Demand:</strong> Instantly check who owes you money and total outstanding sums.</li>
+              <li><strong>Partial & Full Settlements:</strong> Easily log customer repayments over time.</li>
+              <li><strong>Privacy-Safe Reminders:</strong> Drafts courteous payment reminders for you to forward. <em>Waasz never contacts your customers directly.</em></li>
+            </ul>
+          </div>
+
+          <!-- DOMAIN 4 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">04</span>
+              <span class="domain-tag">Invoicing</span>
+            </div>
+            <h3 class="domain-title">Professional PDF Receipts & Invoices</h3>
+            <ul class="feature-list">
+              <li><strong>Instant PDF Generation:</strong> Creates print-ready, professional PDF receipts on the spot.</li>
+              <li><strong>Direct WhatsApp Delivery:</strong> Delivers the `.pdf` file right inside your chat to forward immediately.</li>
+              <li><strong>Persistent Store Branding:</strong> Remembers your Business Name, CAC/tax info, address, and custom footers.</li>
+            </ul>
+          </div>
+
+          <!-- DOMAIN 5 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">05</span>
+              <span class="domain-tag">Analytics</span>
+            </div>
+            <h3 class="domain-title">Business Intelligence & Margin Analytics</h3>
+            <ul class="feature-list">
+              <li><strong>True Gross Margin Reports:</strong> Calculates exact profit margins per product using real unit costs.</li>
+              <li><strong>80/20 Pareto Analysis:</strong> Highlights the top 20% of inventory driving 80% of your profits.</li>
+              <li><strong>Dead Stock Detection:</strong> Identifies slow-moving items tying up working capital.</li>
+              <li><strong>Pricing Simulations:</strong> Simulate discount scenarios and see required sales volume.</li>
+            </ul>
+          </div>
+
+          <!-- DOMAIN 6 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">06</span>
+              <span class="domain-tag">Automation</span>
+            </div>
+            <h3 class="domain-title">Automated Periodic Reports & Scheduling</h3>
+            <ul class="feature-list">
+              <li><strong>Daily 9:00 PM Summary:</strong> Evening breakdown of total revenue, expenses, and net profit.</li>
+              <li><strong>Sunday 8:30 PM Weekly Report:</strong> Week-over-week growth, trend charts, and inventory status.</li>
+              <li><strong>Monthly P&L on the 1st:</strong> Full comprehensive profit-and-loss overview.</li>
+              <li><strong>Quarterly & Annual Wrap-ups:</strong> 90-day trends and annual business performance summaries.</li>
+            </ul>
+          </div>
+
+          <!-- DOMAIN 7 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">07</span>
+              <span class="domain-tag">Cloud Backup</span>
+            </div>
+            <h3 class="domain-title">Google Drive Automated Cloud Backup</h3>
+            <ul class="feature-list">
+              <li><strong>Automated Monthly Archive:</strong> Automatically saves monthly business PDF statements to your personal Google Drive.</li>
+              <li><strong>Simple Text Authorization:</strong> Text <em>"connect drive"</em> to securely link or disconnect at any time.</li>
+            </ul>
+          </div>
+
+          <!-- DOMAIN 8 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">08</span>
+              <span class="domain-tag">Market Intel</span>
+            </div>
+            <h3 class="domain-title">Live Market Information & Search</h3>
+            <ul class="feature-list">
+              <li><strong>Real-Time FX Rates:</strong> Fetches live parallel and official market exchange rates (USD, GBP, EUR to NGN).</li>
+              <li><strong>Commodity & Fuel Lookups:</strong> Instant lookup of local pump prices and market commodity trends.</li>
+            </ul>
+          </div>
+
+          <!-- DOMAIN 9 -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-num">09</span>
+              <span class="domain-tag">Operations</span>
+            </div>
+            <h3 class="domain-title">Task Management & Reminders</h3>
+            <ul class="feature-list">
+              <li><strong>Natural Language Reminders:</strong> E.g., <em>"Remind me tomorrow at 9am to call flour distributor"</em>.</li>
+              <li><strong>Minute-by-Minute Engine:</strong> Real-time background scheduler triggers alerts accurately on time.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ============================================================
+         4. HOW IT WORKS
+         ============================================================ -->
+    <section class="how-section">
+      <div class="container">
+        <div class="editorial-container">
+          <div class="section-label">How It Works</div>
+          <h2 class="section-heading">Three simple steps. No training required.</h2>
+          
+          <div class="steps-list">
+            <div class="step-row">
+              <div class="step-marker">1</div>
+              <div class="step-content">
+                <h3>Open the WhatsApp Chat</h3>
+                <p>Tap the WhatsApp button on this page. There are no app store downloads, complicated account setups, or password forms to fill out.</p>
+              </div>
+            </div>
+
+            <div class="step-row">
+              <div class="step-marker">2</div>
+              <div class="step-content">
+                <h3>Text, speak, or snap a photo in plain language</h3>
+                <p>Type a message, send a quick voice note, or take a picture of your paper sales ledger, POS printout, or supplier invoice in English or Nigerian Pidgin.</p>
+              </div>
+            </div>
+
+            <div class="step-row">
+              <div class="step-marker">3</div>
+              <div class="step-content">
+                <h3>Get your records and reports on demand</h3>
+                <p>Waasz analyzes your inputs, updates your ledgers immediately, sends PDF receipts when requested, and delivers end-of-day profit summaries straight back to you.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ============================================================
+         5. WHO IT'S FOR
+         ============================================================ -->
+    <section class="audience-section">
+      <div class="container">
+        <div class="editorial-container">
+          <div class="section-label">Targeted Focus</div>
+          <h2 class="section-heading">Built specifically for real trade businesses.</h2>
+          <p>
+            Waasz is not built for Silicon Valley tech companies or corporate accountants. It is engineered specifically for traders and business operators in Nigeria who handle real cash, credit, and inventory daily.
+          </p>
+
+          <div class="audience-box">
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Ideal for:</h3>
+            <ul class="audience-list">
+              <li>
+                <span class="bullet-dash">—</span>
+                <span><strong>Provisions & FMCG Wholesalers:</strong> Tracking high-volume cartons, bags, and split cash/transfer/credit payments.</span>
+              </li>
+              <li>
+                <span class="bullet-dash">—</span>
+                <span><strong>Boutiques & Fashion Vendors:</strong> Managing piece sales, sizing, customer deposits, and instant receipt forwarding.</span>
+              </li>
+              <li>
+                <span class="bullet-dash">—</span>
+                <span><strong>Hardware & Building Material Dealers:</strong> Logging multi-item orders, supplier cost variations, and delivery records.</span>
+              </li>
+              <li>
+                <span class="bullet-dash">—</span>
+                <span><strong>Independent Service Providers:</strong> Keeping track of customer invoices, job expenses, and overdue balances.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ============================================================
+         6. CURRENT STATUS (HONEST PRIVATE BETA & TESTING APPLICATION)
+         ============================================================ -->
+    <section class="status-section">
+      <div class="container">
+        <div class="status-box">
+          <span class="status-badge-inline">Testing Cohort Application</span>
+          <h2 style="font-size: 1.6rem; margin-bottom: 0.75rem;">Currently in Private Beta</h2>
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65;">
+            Waasz is currently in an early private testing phase with a select group of active business owners and traders in Nigeria. We are taking on a limited number of test stores to refine bookkeeping accuracy, image parsing, and automated reporting.
+          </p>
+          <div style="margin-top: 1.25rem;">
+            <a 
+              href="https://forms.gle/RNQUMacZvPzQe9L89" 
+              class="form-beta-btn"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
+                <rect x="9" y="3" width="6" height="4" rx="1"></rect>
+                <path d="M9 14l2 2 4-4"></path>
+              </svg>
+              <span>Apply to Join Testing Phase (Google Form)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="opacity: 0.7;">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. FINAL CTA REPEAT
+         ============================================================ -->
+    <section class="cta-repeat-section">
+      <div class="container">
+        <div class="cta-repeat-content">
+          <h2 style="font-size: 2.25rem;">Start keeping effortless records today.</h2>
+          <p style="max-width: 460px;">
+            Tap below to open a conversation directly with Waasz on WhatsApp (+234 904 476 5496) and begin testing your business records.
+          </p>
+          <a 
+            href="https://wa.me/2349044765496?text=Hi%2C%20I%27d%20like%20to%20try%20Waasz" 
+            class="cta-button large"
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.74 2.66 4.22 3.73.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
+            </svg>
+            <span>Chat with Waasz on WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       8. MINIMAL FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <strong>Waasz</strong> &mdash; SME AI Business Analyst on WhatsApp
+      </div>
+      <div class="footer-disclaimer">
+        Waasz is an independent business intelligence assistant built on the WhatsApp Business API. WhatsApp is a registered trademark of Meta Platforms, Inc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Simple script for interactive mockup tab switching -->
+  <script>
+    function switchMockupTab(tabIndex) {
+      const tabs = document.querySelectorAll('.mockup-tab-btn');
+      const panels = document.querySelectorAll('.chat-panel');
+      
+      tabs.forEach((tab, index) => {
+        if (index === tabIndex) {
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+        } else {
+          tab.classList.remove('active');
+          tab.setAttribute('aria-selected', 'false');
+        }
+      });
+
+      panels.forEach((panel, index) => {
+        if (index === tabIndex) {
+          panel.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+        }
+      });
+    }
+
+    // Auto-cycle tabs every 6 seconds if the user is not actively clicking
+    let currentAutoTab = 0;
+    let userInteracted = false;
+    
+    document.querySelector('.mockup-tab-selector').addEventListener('click', () => {
+      userInteracted = true;
+    });
+
+    setInterval(() => {
+      if (!userInteracted) {
+        currentAutoTab = (currentAutoTab + 1) % 5;
+        switchMockupTab(currentAutoTab);
+      }
+    }, 6000);
+  </script>
+
+</body>
+</html>
