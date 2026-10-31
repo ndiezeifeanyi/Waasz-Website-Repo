@@ -11,7 +11,7 @@
   <meta name="description" content="Waasz AI turns WhatsApp into an autonomous financial OS for African retail businesses. Log sales via voice notes in Pidgin, recover customer debts with automated WhatsApp reminders, stop employee theft, and generate bank-ready credit scores." />
 
   <!-- Expanded Search Keywords -->
-  <meta name="keywords" content="WhatsApp bookkeeping app, WhatsApp financial OS, debt recovery app Nigeria, sales boy tracking app, SME accounting WhatsApp, credit scoring for MSMEs, informal retail inventory app, SMEDAN loan financial statement, Pidgin voice bookkeeping, digital IOU WhatsApp, business management app Lagos, African MSME fintech" />
+  <meta name="keywords" content="WhatsApp bookkeeping app, WhatsApp financial OS, debt recovery app Nigeria, sales boy tracking app, SME accounting WhatsApp, credit scoring for MSMEs, informal retail inventory app, loan readiness financial statement, Pidgin voice bookkeeping, digital IOU WhatsApp, business management app Lagos, African MSME fintech" />
 
   <!-- Geo-Targeting Meta Tags -->
   <meta name="geo.region" content="NG-LA" />
@@ -57,20 +57,21 @@
         "applicationCategory": "BusinessApplication, FinanceApplication",
         "operatingSystem": "WhatsApp (Web, iOS, Android)",
         "applicationSubCategory": "Financial Operating System, Bookkeeping & Credit Scoring",
-        "description": "WhatsApp-native financial operating system for African retail MSMEs to record sales via voice notes in Pidgin, recover customer debts via automated reminders, stop staff theft, and build bank-ready credit scores.",
+        "description": "WhatsApp-native financial operating system for African retail MSMEs to record sales via voice notes in Pidgin, recover customer debts via automated reminders, stop staff theft, and build loan-ready credit scores.",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "NGN"
         },
         "featureList": [
-          "Voice & text bookkeeping in English and Nigerian Pidgin",
-          "Photo scanning for supplier receipts and POS slips",
-          "Automated customer debt collection with polite WhatsApp reminders",
+          "Voice, text & receipt bookkeeping in English and Nigerian Pidgin",
+          "Photo scanning for supplier waybills, receipts, and POS slips",
+          "Automated customer debt collection with digital IOUs and WhatsApp reminders",
           "Staff accounts with anti-theft controls",
-          "Credit scoring from 300 to 850 for business loans",
-          "Bank-ready financial health reports accepted by lenders",
-          "Live stock and profit margin tracking"
+          "Live stock, product expiry, and profit margin tracking",
+          "Credit scoring from 300 to 850 on WhatsApp",
+          "Loan-ready 2-page Financial Health Profile PDF statements",
+          "Automated Google Drive spreadsheet backup, reminders, and live FX rates"
         ]
       },
       {
@@ -79,6 +80,9 @@
         "name": "Waasz AI",
         "url": "https://waasztech.vercel.app",
         "logo": "https://waasztech.vercel.app/assets/logo.png",
+        "sameAs": [
+          "https://www.linkedin.com/company/waasz-ai/"
+        ],
         "founder": {
           "@type": "Person",
           "name": "Ndibueze Ifeanyichukwu"
@@ -124,15 +128,15 @@
             "name": "Can I record sales using voice notes or Nigerian Pidgin on Waasz AI?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Waasz AI understands 5-second voice notes, English, and Nigerian Pidgin, automatically recording transactions into organized financial ledgers."
+              "text": "Yes. Waasz AI understands 5-second voice notes, English, and Nigerian Pidgin as well as local trade units like cartons, bags, crates, and pieces, automatically recording transactions into organized financial ledgers."
             }
           },
           {
             "@type": "Question",
-            "name": "How does Waasz AI help informal shopkeepers get bank loans?",
+            "name": "How does Waasz AI help small businesses prepare for loans?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Every logged transaction builds a credit score between 300 and 850 along with a stamped 2-page Financial Health Profile PDF accepted by commercial banks and grant bodies like SMEDAN as proof of turnover."
+              "text": "Most retail merchants get rejected for financing simply because they cannot prove their daily cash flow. Waasz AI turns your informal WhatsApp sales and expense chats into structured financial statements and a 300 to 850 credit score. Whenever you want to apply for a bank loan, microfinance credit, or SME grant, you can download your 2-page Financial Health Profile PDF as clear proof of your business turnover."
             }
           }
         ]
@@ -756,7 +760,7 @@
     }
 
     /* -------------------------------------------------------------
-       SECTION 3: THE 6 PILLARS
+       SECTION 3: UNIFIED CORE CAPABILITIES (8 CARDS)
        ------------------------------------------------------------- */
     .pillars-section {
       padding: 5rem 0;
@@ -766,19 +770,13 @@
     .pillars-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.75rem;
       margin-top: 3rem;
     }
 
     @media (min-width: 768px) {
       .pillars-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .pillars-grid {
-        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -789,7 +787,7 @@
       padding: 1.85rem;
       display: flex;
       flex-direction: column;
-      gap: 1.1rem;
+      gap: 1rem;
       transition: all 0.2s ease;
       position: relative;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
@@ -842,6 +840,35 @@
       line-height: 1.6;
     }
 
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: 0.15rem;
+    }
+
+    .feature-list li {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 1.1rem;
+    }
+
+    .feature-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 1.15rem;
+      line-height: 1.1;
+    }
+
+    .feature-list li strong {
+      color: var(--text-main);
+    }
+
     .pillar-highlight-box {
       background: var(--bg-subtle);
       border-radius: 6px;
@@ -867,111 +894,11 @@
     }
 
     /* -------------------------------------------------------------
-       SECTION 4: OPERATIONAL CATALOG
-       ------------------------------------------------------------- */
-    .capabilities-section {
-      padding: 5rem 0;
-      background: var(--bg-surface);
-    }
-
-    .cap-grid-full {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.75rem;
-      margin-top: 2.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .cap-grid-full {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .cap-grid-full {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .domain-card {
-      background: var(--bg-page);
-      border: 1px solid var(--border-light);
-      border-radius: 6px;
-      padding: 1.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      transition: border-color 0.15s ease;
-    }
-
-    .domain-card:hover {
-      border-color: var(--border-strong);
-    }
-
-    .domain-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-light);
-      padding-bottom: 0.65rem;
-    }
-
-    .domain-num {
-      font-family: var(--font-headline);
-      font-size: 1.25rem;
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .domain-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-subtle);
-    }
-
-    .domain-title {
-      font-family: var(--font-headline);
-      font-size: 1.3rem;
-      color: var(--text-main);
-      line-height: 1.25;
-    }
-
-    .feature-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-    }
-
-    .feature-list li {
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: var(--text-muted);
-      position: relative;
-      padding-left: 1.1rem;
-    }
-
-    .feature-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-size: 1.15rem;
-      line-height: 1.1;
-    }
-
-    .feature-list li strong {
-      color: var(--text-main);
-    }
-
-    /* -------------------------------------------------------------
-       SECTION 5: FAQ ACCORDION
+       SECTION 4: FAQ ACCORDION
        ------------------------------------------------------------- */
     .faq-section {
       padding: 5rem 0;
-      background: var(--bg-page);
+      background: var(--bg-surface);
     }
 
     .faq-container {
@@ -987,7 +914,7 @@
     }
 
     .faq-item {
-      background: var(--bg-surface);
+      background: var(--bg-page);
       border: 1px solid var(--border-light);
       border-radius: 8px;
       overflow: hidden;
@@ -1001,6 +928,7 @@
 
     .faq-item[open] {
       border-color: var(--accent);
+      background: var(--bg-surface);
       box-shadow: 0 4px 12px -2px rgba(194, 65, 12, 0.06);
     }
 
@@ -1055,19 +983,19 @@
     }
 
     /* -------------------------------------------------------------
-       SECTION 6: HOW IT WORKS
+       SECTION 5: HOW IT WORKS + PROMPT EXAMPLES
        ------------------------------------------------------------- */
     .how-section {
       padding: 4.5rem 0;
-      background: var(--bg-surface);
+      background: var(--bg-page);
     }
 
     .steps-list {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 2.25rem;
       margin-top: 2.5rem;
-      max-width: 760px;
+      max-width: 780px;
     }
 
     .step-row {
@@ -1089,7 +1017,7 @@
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--accent);
-      background: var(--bg-page);
+      background: var(--bg-surface);
     }
 
     .step-content h3 {
@@ -1102,59 +1030,113 @@
       color: var(--text-muted);
     }
 
+    .step-prompts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .prompt-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--text-main);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-left: 2.5px solid var(--accent);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
     /* -------------------------------------------------------------
-       SECTION 7: WHO IT'S FOR
+       SECTION 6: INDUSTRY SHOWCASE ("WHO IT'S BUILT FOR")
        ------------------------------------------------------------- */
     .audience-section {
-      padding: 4.5rem 0;
-      background: var(--bg-page);
-    }
-
-    .audience-box {
-      border-left: 3px solid var(--accent);
+      padding: 5rem 0;
       background: var(--bg-surface);
-      border-top: 1px solid var(--border-light);
-      border-right: 1px solid var(--border-light);
-      border-bottom: 1px solid var(--border-light);
-      padding: 2.25rem 2rem;
-      border-radius: 0 6px 6px 0;
-      max-width: 820px;
-      margin: 2rem 0;
     }
 
-    .audience-list {
-      list-style: none;
+    .industry-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 2.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .industry-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .industry-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .industry-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 1.65rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-top: 1.25rem;
-    }
-
-    .audience-list li {
-      display: flex;
-      align-items: flex-start;
       gap: 0.85rem;
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.6;
+      transition: all 0.2s ease;
     }
 
-    .audience-check {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
+    .industry-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px -2px rgba(194, 65, 12, 0.07);
+    }
+
+    .industry-icon-wrap {
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
       background: var(--accent-soft);
       border: 1px solid var(--accent-border);
       color: var(--accent);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
+    }
+
+    .industry-title {
+      font-family: var(--font-headline);
+      font-size: 1.28rem;
+      color: var(--text-main);
+      line-height: 1.25;
+    }
+
+    .industry-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .industry-badge {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
     }
 
     /* -------------------------------------------------------------
-       SECTION 8: STATUS / PRIVATE BETA
+       SECTION 7: STATUS / PRIVATE BETA
        ------------------------------------------------------------- */
     .status-section {
       padding: 3.5rem 0;
@@ -1210,7 +1192,7 @@
     }
 
     /* -------------------------------------------------------------
-       SECTION 9: FINAL CTA
+       SECTION 8: FINAL CTA
        ------------------------------------------------------------- */
     .cta-repeat-section {
       padding: 5.5rem 0;
@@ -1241,17 +1223,51 @@
     .footer-content {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.25rem;
       align-items: center;
       text-align: center;
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 768px) {
       .footer-content {
         flex-direction: row;
         justify-content: space-between;
         text-align: left;
       }
+    }
+
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-brand-col {
+        align-items: flex-start;
+      }
+    }
+
+    .footer-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-decoration: none;
+      padding: 0.35rem 0.7rem;
+      border-radius: 5px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      transition: all 0.15s ease;
+    }
+
+    .footer-social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
     }
 
     .footer-disclaimer {
@@ -1596,7 +1612,7 @@
                 <!-- TAB 4: BANK REPORT -->
                 <div id="tab-4" class="chat-panel">
                   <div class="wa-bubble sent">
-                    Generate my financial health report for my bank loan application
+                    Generate my 2-page Financial Health Profile PDF
                     <span class="wa-time">
                       09:00 AM
                       <svg class="wa-ticks" viewBox="0 0 16 15">
@@ -1608,7 +1624,7 @@
                   <div class="wa-bubble received">
                     <div>📊 <strong>Waasz Credit Score: 748 / 850</strong></div>
                     <div style="font-size: 0.75rem; color: #00A884; font-weight: 700; margin-top: 2px;">
-                      GRADE: A (Bank Ready)
+                      GRADE: A (Loan Ready)
                     </div>
                     <div class="wa-entry-card">
                       <div class="wa-entry-row">
@@ -1630,10 +1646,10 @@
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14 2 14 8 20 8"></polyline>
                       </svg>
-                      Institutional_Health_Profile_Stamped.pdf
+                      Financial_Health_Profile_Stamped.pdf
                     </div>
                     <div style="font-size: 0.72rem; color: #64748B; margin-top: 4px;">
-                      Stamped and verified. Accepted by commercial banks and SMEDAN loan programs.
+                      Verified 2-page PDF statement generated from your daily ledger. Ready to download and share when applying for business loans, supplier credit, or SME grants.
                     </div>
                     <span class="wa-time">09:00 AM</span>
                   </div>
@@ -1657,14 +1673,14 @@
         <div class="editorial-container">
           <div class="section-label">Beyond Basic Bookkeeping</div>
           <h2 class="section-heading">
-            African retail businesses lose money to three things: staff theft, uncollected customer credit, and lack of bank loan records.
+            African retail businesses lose money to three things: staff theft, uncollected customer credit, and missing financial records.
           </h2>
           <p class="editorial-p">
             Traditional accounting software fails because it expects busy shop owners to sit down and type numbers into spreadsheets. Between serving customers, receiving supplier deliveries, and running the shop floor, that simply never happens.
           </p>
 
           <div class="editorial-callout-box">
-            <strong>The Waasz Difference:</strong> Waasz gives you a complete operational back office directly inside WhatsApp. It records daily sales, stops employee theft, recovers money your customers owe you, and builds verified financial records that banks accept for business loans.
+            <strong>The Waasz Difference:</strong> Waasz gives you a complete operational back office directly inside WhatsApp. It records daily sales, stops employee theft, recovers money your customers owe you, and builds structured financial statements you can present when applying for business financing.
           </div>
 
           <p class="editorial-p">
@@ -1677,122 +1693,199 @@
     <hr class="section-divider" />
 
     <!-- ============================================================
-         3. THE 6 PILLARS
+         3. UNIFIED CORE CAPABILITIES (8 CARDS)
          ============================================================ -->
     <section class="pillars-section">
       <div class="container">
         <div class="editorial-container" style="text-align: center; margin-bottom: 2rem;">
           <div class="section-label">Core Capabilities</div>
-          <h2 class="section-heading">Built for Real Retail Merchants</h2>
-          <p>Everything you need to protect profits, collect debts, and grow your store without opening another app.</p>
+          <h2 class="section-heading">Everything Your Store Needs Inside One WhatsApp Thread</h2>
+          <p>From 5-second Pidgin voice bookkeeping and staff anti-theft controls to automated debt recovery and loan-ready financial profiles.</p>
         </div>
 
         <div class="pillars-grid">
           
-          <!-- PILLAR 1 -->
+          <!-- CARD 1: BOOKKEEPING -->
           <div class="pillar-card">
             <div class="pillar-top">
               <span class="pillar-badge">Quick Recording</span>
               <span class="pillar-num">01</span>
             </div>
-            <h3 class="pillar-title">Voice & Text Bookkeeping</h3>
+            <h3 class="pillar-title">Voice, Text & Receipt Bookkeeping</h3>
             <p class="pillar-desc">
-              Record sales in English or Pidgin in seconds. Shopkeepers log daily sales, expenses, and inventory using natural 5-second voice notes, text messages, or camera photos of supplier invoices and handwritten paper receipts.
+              Log sales and expenses in seconds using 5-second voice notes, English or Pidgin text, or camera photos of paper receipts, handwritten notebooks, and supplier waybills.
             </p>
+            <ul class="feature-list">
+              <li><strong>Local Trade Units:</strong> Understands cartons, bags, crates, rolls, dozens, packs, and pieces.</li>
+              <li><strong>Payment Splitting:</strong> Automatically separates Cash, Bank Transfer, POS, and Credit sales.</li>
+              <li><strong>Easy Corrections:</strong> Fix any entry by texting (for example, <em>"Change last fuel expense to ₦4,000"</em>).</li>
+              <li><strong>Multi-Currency Support:</strong> Record transactions in NGN, USD, GBP, or EUR.</li>
+            </ul>
             <div class="pillar-highlight-box">
-              <span class="pillar-highlight-label">Technology Highlight</span>
+              <span class="pillar-highlight-label">Zero Typing Required</span>
               <p class="pillar-highlight-text">
-                Instant double-entry records with zero manual typing or accounting jargon.
+                Structures informal chats and voice notes into clean double-entry records automatically.
               </p>
             </div>
           </div>
 
-          <!-- PILLAR 2 -->
+          <!-- CARD 2: DEBT RECOVERY -->
           <div class="pillar-card">
             <div class="pillar-top">
               <span class="pillar-badge">Cash Recovery</span>
               <span class="pillar-num">02</span>
             </div>
-            <h3 class="pillar-title">Automated Debt Collection</h3>
+            <h3 class="pillar-title">Automated Debt Collection & Digital IOUs</h3>
             <p class="pillar-desc">
-              Polite WhatsApp payment reminders to recover credit. Stop losing working capital to uncollected customer credit. Waasz tracks credit sales and sends polite, automated WhatsApp reminders with your bank transfer details until paid.
+              Stop losing working capital to uncollected customer credit. Waasz turns every credit sale into a tracked digital IOU and follows up automatically on WhatsApp.
             </p>
+            <ul class="feature-list">
+              <li><strong>Timestamped Digital IOUs:</strong> Records the buyer's phone number, items taken, amount owed, and agreed due date.</li>
+              <li><strong>Polite WhatsApp Reminders:</strong> Sends scheduled payment reminders with your direct bank details (Moniepoint, OPay, Zenith, Access, and more).</li>
+              <li><strong>Part-Payment Tracking:</strong> Logs partial repayments and updates remaining customer balances instantly.</li>
+            </ul>
             <div class="pillar-highlight-box">
               <span class="pillar-highlight-label">Key Capability</span>
               <p class="pillar-highlight-text">
-                Recovers money owed without awkward phone calls or confrontations.
+                Recovers money owed on time without awkward phone calls or arguments with loyal customers.
               </p>
             </div>
           </div>
 
-          <!-- PILLAR 3 -->
+          <!-- CARD 3: STAFF ANTI-THEFT -->
           <div class="pillar-card">
             <div class="pillar-top">
               <span class="pillar-badge">Staff Protection</span>
               <span class="pillar-num">03</span>
             </div>
-            <h3 class="pillar-title">Staff Accounts & Anti-Theft</h3>
+            <h3 class="pillar-title">Staff Accounts & Anti-Theft Controls</h3>
             <p class="pillar-desc">
-              Staff record sales without seeing cost prices or total profit. Built specifically for retail reality, shop owners delegate daily sales recording to shop attendants through restricted WhatsApp sub-accounts.
+              Built for real shop floor delegation. Link your shop attendants ("sales boys and girls") to your store through restricted WhatsApp sub-accounts.
             </p>
+            <ul class="feature-list">
+              <li><strong>Role-Based Privacy:</strong> Attendants can log daily counter sales and issue customer receipts from their own phones.</li>
+              <li><strong>Hidden Cost Prices:</strong> Staff cannot view your wholesale purchase costs, store profit margins, or total cash balances.</li>
+              <li><strong>Tamper-Proof Audit Log:</strong> Every sale is tagged with the exact attendant who recorded it and cannot be secretly deleted.</li>
+            </ul>
             <div class="pillar-highlight-box">
               <span class="pillar-highlight-label">Key Capability</span>
               <p class="pillar-highlight-text">
-                Attendants log sales and issue customer receipts, but cannot view wholesale cost prices, profit margins, or store bank balances.
+                Protects your trade secrets and stops price manipulation even when you are away from the shop.
               </p>
             </div>
           </div>
 
-          <!-- PILLAR 4 -->
+          <!-- CARD 4: LIVE STOCK, EXPIRY & MARGINS -->
           <div class="pillar-card">
             <div class="pillar-top">
-              <span class="pillar-badge">Credit Score</span>
+              <span class="pillar-badge">Inventory & Margins</span>
               <span class="pillar-num">04</span>
             </div>
-            <h3 class="pillar-title">Credit Scoring on WhatsApp</h3>
+            <h3 class="pillar-title">Live Stock, Expiry & Margin Tracking</h3>
             <p class="pillar-desc">
-              Turn transaction history into a verified credit score. Transform your daily market trade into an objective credit score between 300 and 850 without collateral requirements.
+              Know exactly what is on your shelves, which products bring the highest profit, and what needs restocking before customers ask.
             </p>
+            <ul class="feature-list">
+              <li><strong>Auto Stock Deduction:</strong> Deducts sold quantities automatically and updates unit costs when you snap supplier waybills.</li>
+              <li><strong>Low-Stock & Expiry Alerts:</strong> Warns you before fast-moving items run out or perishable goods expire.</li>
+              <li><strong>True Gross Profit:</strong> Calculates real profit per item after deducting cost of goods sold and highlights best-selling vs slow-moving stock.</li>
+            </ul>
             <div class="pillar-highlight-box">
               <span class="pillar-highlight-label">Key Capability</span>
               <p class="pillar-highlight-text">
-                Analyzes sales volume, daily consistency, and debt repayment history to prove creditworthiness to lenders.
+                Stops dead stock from tying up your cash and prevents surprise stockouts on your best sellers.
               </p>
             </div>
           </div>
 
-          <!-- PILLAR 5 -->
+          <!-- CARD 5: CREDIT SCORING -->
+          <div class="pillar-card">
+            <div class="pillar-top">
+              <span class="pillar-badge">Credit Readiness</span>
+              <span class="pillar-num">05</span>
+            </div>
+            <h3 class="pillar-title">Credit Scoring on WhatsApp (300 to 850)</h3>
+            <p class="pillar-desc">
+              Transform your daily market trade into an objective, verifiable creditworthiness score between 300 and 850 just by running your store on WhatsApp.
+            </p>
+            <ul class="feature-list">
+              <li><strong>Daily Activity Tracking:</strong> Evaluates your transaction consistency, sales turnover, and expense discipline over time.</li>
+              <li><strong>Margin & Repayment Signals:</strong> Factors in your gross profit stability and how reliably credit customers pay you back.</li>
+              <li><strong>Live Score Updates:</strong> Check your current score and actionable tips to improve your rating at any time in chat.</li>
+            </ul>
+            <div class="pillar-highlight-box">
+              <span class="pillar-highlight-label">Key Capability</span>
+              <p class="pillar-highlight-text">
+                Turns informal cash and transfer trade into a measurable financial track record.
+              </p>
+            </div>
+          </div>
+
+          <!-- CARD 6: LOAN-READY FINANCIAL STATEMENTS -->
           <div class="pillar-card">
             <div class="pillar-top">
               <span class="pillar-badge">Verified Statements</span>
-              <span class="pillar-num">05</span>
-            </div>
-            <h3 class="pillar-title">Bank-Ready Financial Reports</h3>
-            <p class="pillar-desc">
-              Instant stamped PDF statements accepted by lenders. Generate a formal financial statement with one WhatsApp message whenever you apply for loans or government grants.
-            </p>
-            <div class="pillar-highlight-box">
-              <span class="pillar-highlight-label">Key Capability</span>
-              <p class="pillar-highlight-text">
-                Accepted by commercial banks, microfinance institutions, and SMEDAN loan programs as verified proof of business turnover.
-              </p>
-            </div>
-          </div>
-
-          <!-- PILLAR 6 -->
-          <div class="pillar-card">
-            <div class="pillar-top">
-              <span class="pillar-badge">Stock & Margins</span>
               <span class="pillar-num">06</span>
             </div>
-            <h3 class="pillar-title">Live Stock & Margin Tracking</h3>
+            <h3 class="pillar-title">Loan-Ready Financial Statements</h3>
             <p class="pillar-desc">
-              Restock alerts and real gross profit calculations. Stay on top of your inventory and identify profit leaks in real time.
+              Banks and lenders turn down good businesses when financial records are missing or stuck in paper notebooks. Waasz prepares your formal records automatically.
             </p>
+            <ul class="feature-list">
+              <li><strong>2-Page Financial Health Profile:</strong> Generate a clean, stamped PDF statement with a single WhatsApp command.</li>
+              <li><strong>Complete Cash Flow Proof:</strong> Summarizes monthly revenue, cost of goods sold, operating expenses, net profit, and inventory value.</li>
+              <li><strong>Audit-Ready Structure:</strong> Formatted clearly so you can present credible records when applying for loans, supplier credit, or SME grants.</li>
+            </ul>
             <div class="pillar-highlight-box">
               <span class="pillar-highlight-label">Key Capability</span>
               <p class="pillar-highlight-text">
-                Low stock alerts, best-selling product tracking, margin calculations, and instant branded PDF receipts sent directly to customers over WhatsApp.
+                Gives you organized proof of business turnover whenever financing opportunities arise.
+              </p>
+            </div>
+          </div>
+
+          <!-- CARD 7: INSTANT RECEIPTS & BUSINESS ANALYTICS -->
+          <div class="pillar-card">
+            <div class="pillar-top">
+              <span class="pillar-badge">Receipts & Reports</span>
+              <span class="pillar-num">07</span>
+            </div>
+            <h3 class="pillar-title">Instant Customer Receipts & Business Analytics</h3>
+            <p class="pillar-desc">
+              Look professional to every buyer and receive automated closing reports without touching a calculator at the end of the day.
+            </p>
+            <ul class="feature-list">
+              <li><strong>Branded WhatsApp Receipts:</strong> Generate clean PDF or image receipts with your store name, phone number, and bank details to forward to buyers.</li>
+              <li><strong>9:00 PM Daily Closing Brief:</strong> Automatic evening summary of total sales, cash vs transfer breakdown, expenses, and net profit.</li>
+              <li><strong>Weekly & Monthly Reviews:</strong> Sunday evening performance digests and full monthly profit-and-loss breakdowns.</li>
+            </ul>
+            <div class="pillar-highlight-box">
+              <span class="pillar-highlight-label">Key Capability</span>
+              <p class="pillar-highlight-text">
+                Replaces hours of night-time paper balancing with an automatic evening report on your phone.
+              </p>
+            </div>
+          </div>
+
+          <!-- CARD 8: CLOUD SPREADSHEETS, REMINDERS & MARKET RATES -->
+          <div class="pillar-card">
+            <div class="pillar-top">
+              <span class="pillar-badge">Cloud & Utilities</span>
+              <span class="pillar-num">08</span>
+            </div>
+            <h3 class="pillar-title">Cloud Spreadsheets, Reminders & Market Rates</h3>
+            <p class="pillar-desc">
+              Your business records are backed up to the cloud automatically, complete with daily operational tools built right into your chat thread.
+            </p>
+            <ul class="feature-list">
+              <li><strong>Google Drive & Excel Sync:</strong> Type <em>"connect drive"</em> to automatically archive clean spreadsheets and monthly PDFs to your personal Google Drive.</li>
+              <li><strong>Custom Task Reminders:</strong> Set natural alarms by texting (for example, <em>"Remind me tomorrow at 9am to pay the flour distributor"</em>).</li>
+              <li><strong>Live FX & Tax Estimates:</strong> Check live USD, GBP, and EUR exchange rates and simple tax calculation tips inside WhatsApp.</li>
+            </ul>
+            <div class="pillar-highlight-box">
+              <span class="pillar-highlight-label">Key Capability</span>
+              <p class="pillar-highlight-text">
+                Keeps your books safe in the cloud even if your phone is lost, damaged, or replaced.
               </p>
             </div>
           </div>
@@ -1804,159 +1897,14 @@
     <hr class="section-divider" />
 
     <!-- ============================================================
-         4. OPERATIONAL CATALOG
-         ============================================================ -->
-    <section class="capabilities-section">
-      <div class="container">
-        <div class="editorial-container" style="text-align: center; margin-bottom: 1.5rem;">
-          <div class="section-label">Complete Feature List</div>
-          <h2 class="section-heading">Everything Handled Inside Your WhatsApp Thread</h2>
-          <p>Everything Waasz automates inside your WhatsApp thread, from daily ledger parsing to automated Google Drive financial archives.</p>
-        </div>
-
-        <div class="cap-grid-full">
-          
-          <!-- DOMAIN 1 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">01</span>
-              <span class="domain-tag">Bookkeeping</span>
-            </div>
-            <h3 class="domain-title">Daily Sales and Expense Bookkeeping</h3>
-            <ul class="feature-list">
-              <li><strong>Quick Logging:</strong> Text, speak in English or Pidgin, or snap photos of handwritten notebooks and POS printouts.</li>
-              <li><strong>Payment Splitting:</strong> Automatically splits sales into Cash, Bank Transfer, POS, or Credit.</li>
-              <li><strong>Instant Corrections:</strong> Make quick changes by texting (e.g. <em>"Change last fuel expense to ₦4,000"</em>).</li>
-              <li><strong>Secure Records:</strong> Tamper-proof transaction history ensures accountant-grade reliability.</li>
-            </ul>
-          </div>
-
-          <!-- DOMAIN 2 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">02</span>
-              <span class="domain-tag">Inventory</span>
-            </div>
-            <h3 class="domain-title">Inventory and Stock Tracking</h3>
-            <ul class="feature-list">
-              <li><strong>Invoice and Waybill Scanning:</strong> Snap supplier waybills or receipts to update restocks and unit costs.</li>
-              <li><strong>Automated Stock Deduction:</strong> Automatically updates stock counts whenever a sale is logged.</li>
-              <li><strong>Low-Stock Alerts:</strong> Warns you before your best-selling products run out.</li>
-              <li><strong>Damaged Goods Tracking:</strong> Log returns or damaged items with quick reason notes.</li>
-            </ul>
-          </div>
-
-          <!-- DOMAIN 3 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">03</span>
-              <span class="domain-tag">Debtors</span>
-            </div>
-            <h3 class="domain-title">Customer Credit and Debt Recovery</h3>
-            <ul class="feature-list">
-              <li><strong>Customer Balances on Demand:</strong> Check outstanding customer balances and purchase histories instantly.</li>
-              <li><strong>Partial and Full Payments:</strong> Easily log customer repayments over time.</li>
-              <li><strong>Automated Payment Reminders:</strong> Polite WhatsApp reminders sent with your direct bank transfer details.</li>
-            </ul>
-          </div>
-
-          <!-- DOMAIN 4 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">04</span>
-              <span class="domain-tag">Invoicing</span>
-            </div>
-            <h3 class="domain-title">Instant PDF Receipts and Invoices</h3>
-            <ul class="feature-list">
-              <li><strong>Instant PDF Delivery:</strong> Generates clean, professional PDF receipts directly in the chat thread.</li>
-              <li><strong>Custom Store Branding:</strong> Includes your business name, phone number, address, and bank payment instructions.</li>
-              <li><strong>Customer Forwarding:</strong> Forward receipts to customers with a single tap in WhatsApp.</li>
-            </ul>
-          </div>
-
-          <!-- DOMAIN 5 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">05</span>
-              <span class="domain-tag">Profits</span>
-            </div>
-            <h3 class="domain-title">Profit Margins and Best-Selling Products</h3>
-            <ul class="feature-list">
-              <li><strong>True Gross Profit:</strong> Calculates exact profit on every product using your real unit purchase costs.</li>
-              <li><strong>Best-Selling Products:</strong> Highlights the top products driving the majority of your sales and profits.</li>
-              <li><strong>Slow-Moving Stock:</strong> Identifies products tying up your working capital.</li>
-              <li><strong>Price Check Simulations:</strong> Test discounts and see the turnover needed to protect profits.</li>
-            </ul>
-          </div>
-
-          <!-- DOMAIN 6 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">06</span>
-              <span class="domain-tag">Summaries</span>
-            </div>
-            <h3 class="domain-title">Daily and Weekly Financial Summaries</h3>
-            <ul class="feature-list">
-              <li><strong>Daily 9:00 PM Summary:</strong> Evening breakdown of total revenue, expenses, and net profit.</li>
-              <li><strong>Sunday 8:30 PM Weekly Brief:</strong> Week-over-week performance summary and working capital updates.</li>
-              <li><strong>Monthly Profit and Loss:</strong> Comprehensive statements ready for your records.</li>
-            </ul>
-          </div>
-
-          <!-- DOMAIN 7 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">07</span>
-              <span class="domain-tag">Cloud Backup</span>
-            </div>
-            <h3 class="domain-title">Automated Google Drive Backup</h3>
-            <ul class="feature-list">
-              <li><strong>Monthly Cloud Archive:</strong> Automatically saves monthly financial PDF statements to your personal Google Drive.</li>
-              <li><strong>Simple Text Setup:</strong> Type <em>"connect drive"</em> to link or disconnect your account securely.</li>
-            </ul>
-          </div>
-
-          <!-- DOMAIN 8 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">08</span>
-              <span class="domain-tag">Market Rates</span>
-            </div>
-            <h3 class="domain-title">Real-Time Currency and Market Info</h3>
-            <ul class="feature-list">
-              <li><strong>Live Exchange Rates:</strong> Live parallel and official market exchange rates for USD, GBP, and EUR to NGN.</li>
-              <li><strong>Local Price Benchmarks:</strong> Quick lookups of fuel pump prices and staple market commodity rates.</li>
-            </ul>
-          </div>
-
-          <!-- DOMAIN 9 -->
-          <div class="domain-card">
-            <div class="domain-header">
-              <span class="domain-num">09</span>
-              <span class="domain-tag">Reminders</span>
-            </div>
-            <h3 class="domain-title">Store Tasks and Reminders</h3>
-            <ul class="feature-list">
-              <li><strong>Natural Reminders:</strong> Set reminders by texting (e.g. <em>"Remind me tomorrow at 9am to call flour distributor"</em>).</li>
-              <li><strong>Timely WhatsApp Alerts:</strong> Reliable background engine notifies you directly on WhatsApp.</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <hr class="section-divider" />
-
-    <!-- ============================================================
-         5. FAQ SECTION
+         4. FAQ SECTION
          ============================================================ -->
     <section class="faq-section" id="faq">
       <div class="container faq-container">
         <div style="text-align: center; margin-bottom: 2rem;">
           <div class="section-label">Common Questions</div>
           <h2 class="section-heading">Frequently Asked Questions</h2>
-          <p>Everything you need to know about operating Waasz AI in your store, managing staff, and securing institutional growth loans.</p>
+          <p>Everything you need to know about running Waasz AI in your store, managing staff accounts, and preparing your financial records for growth.</p>
         </div>
 
         <div class="faq-accordion" role="region" aria-label="Frequently Asked Questions">
@@ -1996,20 +1944,20 @@
               </svg>
             </summary>
             <div class="faq-content">
-              Yes. Waasz AI understands local African trading dialects. You can send a 5-second voice note in Nigerian Pidgin or English (e.g., <em>"I sell 3 cartons of Indomie for 24,000 cash and 1 bag of rice on credit to Mama Ngozi"</em>), and the engine parses every item, amount, and payment status accurately.
+              Yes. Waasz AI understands local African trading dialects and measurement units. You can send a 5-second voice note in Nigerian Pidgin or English (for example, <em>"I sell 3 cartons of Indomie for 24,000 cash and 1 bag of rice on credit to Mama Ngozi"</em>), and the system parses every item, unit, amount, and payment status accurately.
             </div>
           </details>
 
           <!-- Q4 -->
           <details class="faq-item">
             <summary class="faq-trigger">
-              <span>How does Waasz AI help me get bank loans or government grants without collateral?</span>
+              <span>How does Waasz AI help small businesses prepare for loans?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </summary>
             <div class="faq-content">
-              By consistently logging your daily sales and expenses on WhatsApp, Waasz AI automatically builds your Credit Score (300 to 850) and compiles a Stamped 2-Page Financial Health Profile PDF. Commercial banks, microfinance institutions, and SME grant bodies such as SMEDAN accept this stamped report as verified proof of business turnover.
+              Most retail merchants get rejected for financing simply because they cannot prove their daily cash flow. Waasz AI turns your informal WhatsApp sales and expense chats into structured financial statements and a 300 to 850 credit score. Whenever you want to apply for a bank loan, microfinance credit, or SME grant, you can download your 2-page Financial Health Profile PDF as clear proof of your business turnover.
             </div>
           </details>
 
@@ -2035,7 +1983,7 @@
               </svg>
             </summary>
             <div class="faq-content">
-              All your financial records, customer debt ledgers, and credit scores are encrypted and backed up securely in the cloud. As soon as you retrieve your phone number or log in on a new device, your entire business history is instantly accessible.
+              All your financial records, customer debt ledgers, and credit scores are encrypted and backed up securely in the cloud and can be synced to your personal Google Drive. As soon as you retrieve your phone number or log in on a new device, your entire business history is immediately accessible.
             </div>
           </details>
 
@@ -2046,36 +1994,48 @@
     <hr class="section-divider" />
 
     <!-- ============================================================
-         6. HOW IT WORKS
+         5. HOW IT WORKS
          ============================================================ -->
     <section class="how-section">
       <div class="container">
         <div class="editorial-container">
           <div class="section-label">Simple Setup</div>
-          <h2 class="section-heading">Three simple steps. Zero training required.</h2>
+          <h2 class="section-heading">Three simple steps. Talk to Waasz just like a human assistant.</h2>
           
           <div class="steps-list">
             <div class="step-row">
               <div class="step-marker">1</div>
               <div class="step-content">
-                <h3>Open the WhatsApp Chat</h3>
-                <p>Tap the WhatsApp button on this page. There are no app store downloads, complicated account setups, or password forms to fill out.</p>
+                <h3>Log sales, expenses, or restocks in plain language</h3>
+                <p>Send a 5-second voice note in English or Pidgin, type a quick message, or snap a photo of your paper sales notebook or supplier invoice.</p>
+                <div class="step-prompts" aria-label="Example messages for step 1">
+                  <span class="prompt-pill">"Sold 4 cartons of Malt for ₦38,000 transfer"</span>
+                  <span class="prompt-pill">"Chinedu bought goods worth ₦120k, paid ₦70k cash, balance ₦50k"</span>
+                </div>
               </div>
             </div>
 
             <div class="step-row">
               <div class="step-marker">2</div>
               <div class="step-content">
-                <h3>Text, speak, or snap a photo in plain language</h3>
-                <p>Type a message, send a quick voice note in English or Pidgin, or take a picture of your paper sales ledger, POS printout, or supplier invoice.</p>
+                <h3>Track stock and automate customer debt follow-ups</h3>
+                <p>Ask Waasz what is left in your store, issue branded receipts to buyers, or schedule polite WhatsApp payment reminders for credit customers.</p>
+                <div class="step-prompts" aria-label="Example messages for step 2">
+                  <span class="prompt-pill">"Remind Chinedu about his ₦50k balance on Friday"</span>
+                  <span class="prompt-pill">"How many bags of rice are left in the store?"</span>
+                </div>
               </div>
             </div>
 
             <div class="step-row">
               <div class="step-marker">3</div>
               <div class="step-content">
-                <h3>Automated ledgers, debtor recovery & bank reports</h3>
-                <p>Waasz updates your ledgers immediately, automatically collects debts, prevents staff theft, and builds your institutional credit score.</p>
+                <h3>Check real profits and download loan-ready reports</h3>
+                <p>Receive automatic 9:00 PM closing summaries every evening and generate your 2-page Financial Health Profile PDF whenever you need to prove your turnover.</p>
+                <div class="step-prompts" aria-label="Example messages for step 3">
+                  <span class="prompt-pill">"How much profit did we make this week?"</span>
+                  <span class="prompt-pill">"Generate my 2-page Financial Health Profile PDF"</span>
+                </div>
               </div>
             </div>
           </div>
@@ -2086,54 +2046,128 @@
     <hr class="section-divider" />
 
     <!-- ============================================================
-         7. WHO IT'S FOR
+         6. INDUSTRY SHOWCASE ("WHO WAASZ IS BUILT FOR")
          ============================================================ -->
     <section class="audience-section">
       <div class="container">
-        <div class="editorial-container">
-          <div class="section-label">Built for Retail</div>
-          <h2 class="section-heading">Built specifically for high-velocity store owners.</h2>
-          <p>
-            Waasz is not built for Silicon Valley tech companies or corporate accountants. It is engineered specifically for merchants and retail operators who manage active inventory, deal with customer credit, and run real daily shop floors.
-          </p>
+        <div class="editorial-container" style="text-align: center; margin-bottom: 1.5rem;">
+          <div class="section-label">Built for Your Industry</div>
+          <h2 class="section-heading">Built for high-volume retail and growing businesses.</h2>
+          <p>Whether you sell in cartons at a wholesale market, run a neighborhood pharmacy, or manage multiple boutique branches, Waasz adapts to how you trade.</p>
+        </div>
 
-          <div class="audience-box">
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Engineered for:</h3>
-            <ul class="audience-list">
-              <li>
-                <span class="audience-check" aria-hidden="true">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <span><strong>Provisions and FMCG Wholesalers:</strong> Tracking high-volume cartons, bags, split cash or bank transfer payments, and supplier waybills.</span>
-              </li>
-              <li>
-                <span class="audience-check" aria-hidden="true">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <span><strong>Boutiques and Fashion Vendors:</strong> Managing item sales, customer credit deposits, and instant WhatsApp receipt delivery.</span>
-              </li>
-              <li>
-                <span class="audience-check" aria-hidden="true">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <span><strong>Building Materials and Hardware Dealers:</strong> Tracking multi-item orders, attendant counter sales, and customer credit balances.</span>
-              </li>
-              <li>
-                <span class="audience-check" aria-hidden="true">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <span><strong>Independent Distributors and Service Providers:</strong> Automating client invoices, payment reminders, and verified financial records for bank loans.</span>
-              </li>
-            </ul>
+        <div class="industry-grid">
+          
+          <!-- INDUSTRY 1 -->
+          <div class="industry-card">
+            <div class="industry-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="industry-title">Wholesale & FMCG Distributors</h3>
+            <p class="industry-desc">
+              Track high-volume sales in cartons, bags, and crates, manage retailer credit accounts, split cash and transfer payments, and snap supplier waybills.
+            </p>
+            <div class="industry-badge">
+              <span>Top Feature: Automated Debt Collection</span>
+              <span>&rarr;</span>
+            </div>
           </div>
+
+          <!-- INDUSTRY 2 -->
+          <div class="industry-card">
+            <div class="industry-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <h3 class="industry-title">Supermarkets & Provision Stores</h3>
+            <p class="industry-desc">
+              Let cashiers and shop attendants log fast-moving daily counter sales from their own phones while keeping your wholesale cost prices and total profit private.
+            </p>
+            <div class="industry-badge">
+              <span>Top Feature: Staff Anti-Theft Mode</span>
+              <span>&rarr;</span>
+            </div>
+          </div>
+
+          <!-- INDUSTRY 3 -->
+          <div class="industry-card">
+            <div class="industry-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </div>
+            <h3 class="industry-title">Fashion Boutiques & Online Vendors</h3>
+            <p class="industry-desc">
+              Issue instant branded WhatsApp receipts to buyers, track stock across sizes and pieces, and see your true net profit after dispatch delivery fees.
+            </p>
+            <div class="industry-badge">
+              <span>Top Feature: Branded WhatsApp Receipts</span>
+              <span>&rarr;</span>
+            </div>
+          </div>
+
+          <!-- INDUSTRY 4 -->
+          <div class="industry-card">
+            <div class="industry-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+              </svg>
+            </div>
+            <h3 class="industry-title">Pharmacies & Cosmetics Stores</h3>
+            <p class="industry-desc">
+              Monitor pack and unit quantities, receive early alerts before sensitive products expire or run out, and snap distributor invoices to update stock automatically.
+            </p>
+            <div class="industry-badge">
+              <span>Top Feature: Expiry & Restock Alerts</span>
+              <span>&rarr;</span>
+            </div>
+          </div>
+
+          <!-- INDUSTRY 5 -->
+          <div class="industry-card">
+            <div class="industry-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <h3 class="industry-title">Building Materials, Hardware & Electronics</h3>
+            <p class="industry-desc">
+              Manage high-value inventory, track customer deposits and installment balances with digital IOUs, and maintain tamper-proof audit records across attendants.
+            </p>
+            <div class="industry-badge">
+              <span>Top Feature: Digital IOU Tracking</span>
+              <span>&rarr;</span>
+            </div>
+          </div>
+
+          <!-- INDUSTRY 6 -->
+          <div class="industry-card">
+            <div class="industry-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <h3 class="industry-title">Growing SMEs Preparing for Financing</h3>
+            <p class="industry-desc">
+              Replace paper notebooks with structured financial statements and a live 300 to 850 credit score so your business is always ready when capital opportunities arise.
+            </p>
+            <div class="industry-badge">
+              <span>Top Feature: 2-Page Financial Profile</span>
+              <span>&rarr;</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -2141,7 +2175,7 @@
     <hr class="section-divider" />
 
     <!-- ============================================================
-         8. STATUS / PRIVATE BETA
+         7. STATUS / PRIVATE BETA
          ============================================================ -->
     <section class="status-section">
       <div class="container">
@@ -2149,7 +2183,7 @@
           <span class="status-badge-inline">Testing Cohort Application</span>
           <h2 style="font-size: 1.6rem; margin-bottom: 0.75rem;">Currently in Private Beta</h2>
           <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65;">
-            Waasz is currently in an early private testing phase with a select group of active business owners and retail merchants in Nigeria. We are taking on a limited number of test stores to refine voice parsing, staff role permissions, and bank-ready financial records.
+            Waasz is currently in an early private testing phase with a select group of active business owners and retail merchants in Nigeria. We are taking on a limited number of test stores to refine voice parsing, staff role permissions, and loan-ready financial records.
           </p>
           <div style="margin-top: 1.25rem;">
             <a 
@@ -2176,7 +2210,7 @@
     </section>
 
     <!-- ============================================================
-         9. FINAL CTA
+         8. FINAL CTA
          ============================================================ -->
     <section class="cta-repeat-section">
       <div class="container">
@@ -2202,12 +2236,26 @@
   </main>
 
   <!-- ============================================================
-       10. FOOTER
+       9. FOOTER
        ============================================================ -->
   <footer>
     <div class="container footer-content">
-      <div>
-        <strong>Waasz AI</strong>, WhatsApp Financial Operating System for African MSMEs
+      <div class="footer-brand-col">
+        <div>
+          <strong>Waasz AI</strong>, WhatsApp Financial Operating System for African MSMEs
+        </div>
+        <a 
+          href="https://www.linkedin.com/company/waasz-ai/" 
+          class="footer-social-link"
+          target="_blank" 
+          rel="noopener noreferrer"
+          aria-label="Follow Waasz AI on LinkedIn"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+          <span>Follow Waasz AI on LinkedIn</span>
+        </a>
       </div>
       <div class="footer-disclaimer">
         Waasz AI is an independent financial technology infrastructure built on the WhatsApp Business API. WhatsApp is a registered trademark of Meta Platforms, Inc.
