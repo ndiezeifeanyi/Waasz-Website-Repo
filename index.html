@@ -80,12 +80,23 @@
         "name": "Waasz AI",
         "url": "https://waaszai.com",
         "logo": "https://waaszai.com/assets/waasz-logo.png",
+        "email": "info@waaszai.com",
         "sameAs": [
           "https://www.linkedin.com/company/waasz-ai/"
         ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "email": "info@waaszai.com",
+            "contactType": "customer support",
+            "areaServed": "NG",
+            "availableLanguage": ["English", "Nigerian Pidgin"]
+          }
+        ],
         "founder": {
           "@type": "Person",
-          "name": "Ndibueze Ifeanyichukwu"
+          "name": "Ndibueze Ifeanyichukwu",
+          "email": "ndiezeifeanyi@waaszai.com"
         },
         "address": {
           "@type": "PostalAddress",
@@ -194,6 +205,9 @@
       scroll-behavior: smooth;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     body {
@@ -201,7 +215,14 @@
       color: var(--text-main);
       font-family: var(--font-body);
       line-height: 1.6;
+      max-width: 100%;
       overflow-x: hidden;
+      overflow-x: clip;
+    }
+
+    section[id],
+    footer[id] {
+      scroll-margin-top: 80px;
     }
 
     /* TYPOGRAPHY */
@@ -229,7 +250,13 @@
       width: 100%;
       max-width: var(--container-max);
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .container {
+        padding: 0 1.5rem;
+      }
     }
 
     .section-divider {
@@ -244,52 +271,175 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(250, 250, 249, 0.94);
+      background: rgba(250, 250, 249, 0.96);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border-light);
-      padding: 1rem 0;
+      padding: 0.85rem 0;
+      width: 100%;
     }
 
     .nav-wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.75rem;
     }
 
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.5rem;
       text-decoration: none;
+      flex-shrink: 0;
     }
 
     .brand-logo-img {
-      height: 34px;
+      height: 30px;
       width: auto;
       display: block;
       object-fit: contain;
       flex-shrink: 0;
     }
 
+    @media (min-width: 640px) {
+      .brand-logo-img {
+        height: 34px;
+      }
+    }
+
     .brand-name {
       font-family: var(--font-headline);
-      font-size: 1.65rem;
+      font-size: 1.35rem;
       font-weight: 600;
       letter-spacing: -0.02em;
       color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    @media (min-width: 640px) {
+      .brand-name {
+        font-size: 1.65rem;
+      }
     }
 
     .beta-tag {
+      display: none;
       font-family: var(--font-body);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 0.2rem 0.55rem;
+      padding: 0.18rem 0.5rem;
       background: var(--bg-subtle);
       color: var(--text-muted);
       border: 1px solid var(--border-strong);
       border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 640px) {
+      .beta-tag {
+        display: inline-block;
+      }
+    }
+
+    .desktop-nav {
+      display: none;
+      align-items: center;
+      gap: 1.35rem;
+    }
+
+    @media (min-width: 960px) {
+      .desktop-nav {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .mobile-menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .mobile-menu-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @media (min-width: 960px) {
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+
+    .mobile-nav-drawer {
+      display: none;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-top: 0.85rem;
+      margin-top: 0.85rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .mobile-nav-drawer.open {
+      display: flex;
+    }
+
+    @media (min-width: 960px) {
+      .mobile-nav-drawer,
+      .mobile-nav-drawer.open {
+        display: none;
+      }
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link:active {
+      background-color: var(--accent-soft);
+      color: var(--accent);
     }
 
     /* CTA BUTTON STYLE */
@@ -297,7 +447,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       background-color: var(--accent);
       color: #FFFFFF !important;
       font-family: var(--font-body);
@@ -310,6 +460,7 @@
       transition: background-color 0.15s ease, transform 0.1s ease;
       cursor: pointer;
       text-align: center;
+      white-space: nowrap;
     }
 
     .cta-button:hover {
@@ -322,39 +473,66 @@
     }
 
     .cta-button.nav-cta {
-      padding: 0.55rem 1.1rem;
-      font-size: 0.875rem;
+      padding: 0.48rem 0.85rem;
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 640px) {
+      .cta-button.nav-cta {
+        padding: 0.55rem 1.1rem;
+        font-size: 0.875rem;
+      }
     }
 
     .cta-button.large {
-      padding: 1.05rem 2rem;
-      font-size: 1.125rem;
+      padding: 1rem 1.5rem;
+      font-size: 1.05rem;
       width: 100%;
       max-width: 420px;
+      white-space: normal;
+    }
+
+    @media (min-width: 640px) {
+      .cta-button.large {
+        padding: 1.05rem 2rem;
+        font-size: 1.125rem;
+      }
     }
 
     .cta-icon {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       flex-shrink: 0;
       fill: currentColor;
     }
 
     /* HERO SECTION */
     .hero-section {
-      padding: 4.5rem 0 3.5rem;
+      padding: 3rem 0 3rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero-section {
+        padding: 4.5rem 0 3.5rem;
+      }
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2.5rem;
       align-items: center;
+    }
+
+    .hero-grid > * {
+      min-width: 0;
+      max-width: 100%;
     }
 
     @media (min-width: 900px) {
       .hero-grid {
-        grid-template-columns: 1.1fr 1fr;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
         gap: 3.5rem;
       }
     }
@@ -377,7 +555,7 @@
     }
 
     .hero-headline {
-      font-size: 2.5rem;
+      font-size: 2.35rem;
       line-height: 1.14;
       color: var(--text-main);
     }
@@ -389,10 +567,16 @@
     }
 
     .hero-subhead {
-      font-size: 1.125rem;
+      font-size: 1.0625rem;
       color: var(--text-muted);
       max-width: 520px;
       line-height: 1.6;
+    }
+
+    @media (min-width: 640px) {
+      .hero-subhead {
+        font-size: 1.125rem;
+      }
     }
 
     .hero-badge-row {
@@ -434,22 +618,32 @@
       position: relative;
       width: 100%;
       max-width: 450px;
+      min-width: 0;
       margin: 0 auto;
     }
 
     .mockup-tab-selector {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 0.35rem;
       margin-bottom: 0.75rem;
-      overflow-x: auto;
-      padding-bottom: 0.35rem;
-      scrollbar-width: thin;
+      width: 100%;
+    }
+
+    @media (min-width: 640px) {
+      .mockup-tab-selector {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+      }
     }
 
     .mockup-tab-btn {
       background: var(--bg-surface);
       border: 1px solid var(--border-light);
-      padding: 0.4rem 0.7rem;
+      padding: 0.4rem 0.65rem;
       font-family: var(--font-body);
       font-size: 0.75rem;
       font-weight: 600;
@@ -769,14 +963,19 @@
 
     .pillars-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 1.75rem;
       margin-top: 3rem;
     }
 
+    .pillars-grid > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
     @media (min-width: 768px) {
       .pillars-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -1062,20 +1261,25 @@
 
     .industry-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 1.5rem;
       margin-top: 2.75rem;
     }
 
+    .industry-grid > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
     @media (min-width: 768px) {
       .industry-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
     @media (min-width: 1024px) {
       .industry-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
@@ -1165,19 +1369,33 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
+      gap: 0.55rem;
       background-color: var(--bg-surface);
       color: var(--text-main);
       font-family: var(--font-body);
       font-weight: 600;
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       text-decoration: none;
-      padding: 0.85rem 1.6rem;
+      padding: 0.8rem 1.15rem;
       border-radius: 6px;
       border: 1.5px solid var(--border-strong);
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
       transition: all 0.15s ease;
       cursor: pointer;
+      max-width: 100%;
+      line-height: 1.35;
+    }
+
+    @media (min-width: 640px) {
+      .form-beta-btn {
+        font-size: 0.9375rem;
+        padding: 0.85rem 1.6rem;
+        gap: 0.6rem;
+      }
+    }
+
+    .form-beta-btn svg {
+      flex-shrink: 0;
     }
 
     .form-beta-btn:hover {
@@ -1189,6 +1407,19 @@
 
     .form-beta-btn:active {
       transform: translateY(0);
+    }
+
+    .beta-contact-note {
+      margin-top: 1.1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .beta-contact-note a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: underline;
     }
 
     /* -------------------------------------------------------------
@@ -1239,7 +1470,7 @@
     .footer-brand-col {
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.6rem;
       align-items: center;
     }
 
@@ -1249,13 +1480,26 @@
       }
     }
 
+    .footer-social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-social-row {
+        justify-content: flex-start;
+      }
+    }
+
     .footer-social-link {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
       color: var(--text-main);
       font-weight: 600;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       text-decoration: none;
       padding: 0.35rem 0.7rem;
       border-radius: 5px;
@@ -1283,25 +1527,87 @@
        HEADER / NAV
        ============================================================ -->
   <header>
-    <div class="container nav-wrapper">
-      <a href="#" class="brand-group" aria-label="Waasz AI Home">
-        <img src="assets/waasz-logo.png" alt="Waasz AI Logo" class="brand-logo-img" width="27" height="34" />
-        <span class="brand-name">Waasz AI</span>
-        <span class="beta-tag">Private Beta</span>
-      </a>
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-group" aria-label="Waasz AI Home">
+          <img src="assets/waasz-logo.png" alt="Waasz AI Logo" class="brand-logo-img" width="27" height="34" />
+          <span class="brand-name">Waasz AI</span>
+          <span class="beta-tag">Private Beta</span>
+        </a>
 
-      <!-- Direct CTA Link -->
-      <a 
-        href="https://wa.me/2349044765496?text=Hi%20Waasz" 
-        class="cta-button nav-cta"
-        target="_blank" 
-        rel="noopener noreferrer"
-      >
-        <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.74 2.66 4.22 3.73.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
-        </svg>
-        <span>Open in WhatsApp</span>
-      </a>
+        <!-- Desktop Navigation Links -->
+        <nav class="desktop-nav" aria-label="Primary Navigation">
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#industries" class="nav-link">Industries</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+          <a href="#beta" class="nav-link">Private Beta</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <!-- Right CTA + Mobile Menu Button -->
+        <div class="header-actions">
+          <a 
+            href="https://wa.me/2349044765496?text=Hi%20Waasz" 
+            class="cta-button nav-cta"
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.74 2.66 4.22 3.73.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
+            </svg>
+            <span>Open in WhatsApp</span>
+          </a>
+
+          <button 
+            type="button" 
+            class="mobile-menu-btn" 
+            id="mobile-menu-toggle"
+            aria-label="Toggle Navigation Menu" 
+            aria-expanded="false" 
+            aria-controls="mobile-nav-drawer"
+            onclick="toggleMobileMenu()"
+          >
+            <svg id="menu-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg id="menu-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="display: none;">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Collapsible Navigation Drawer -->
+      <nav id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
+        <a href="#features" class="mobile-nav-link" onclick="closeMobileMenu()">
+          <span>Core Features</span>
+          <span>&rarr;</span>
+        </a>
+        <a href="#how-it-works" class="mobile-nav-link" onclick="closeMobileMenu()">
+          <span>How It Works</span>
+          <span>&rarr;</span>
+        </a>
+        <a href="#industries" class="mobile-nav-link" onclick="closeMobileMenu()">
+          <span>Industries</span>
+          <span>&rarr;</span>
+        </a>
+        <a href="#faq" class="mobile-nav-link" onclick="closeMobileMenu()">
+          <span>Frequently Asked Questions (FAQ)</span>
+          <span>&rarr;</span>
+        </a>
+        <a href="#beta" class="mobile-nav-link" onclick="closeMobileMenu()">
+          <span>Join Private Beta Cohort</span>
+          <span>&rarr;</span>
+        </a>
+        <a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()">
+          <span>Contact &amp; Official Emails</span>
+          <span>&rarr;</span>
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -1695,7 +2001,7 @@
     <!-- ============================================================
          3. UNIFIED CORE CAPABILITIES (8 CARDS)
          ============================================================ -->
-    <section class="pillars-section">
+    <section class="pillars-section" id="features">
       <div class="container">
         <div class="editorial-container" style="text-align: center; margin-bottom: 2rem;">
           <div class="section-label">Core Capabilities</div>
@@ -1996,7 +2302,7 @@
     <!-- ============================================================
          5. HOW IT WORKS
          ============================================================ -->
-    <section class="how-section">
+    <section class="how-section" id="how-it-works">
       <div class="container">
         <div class="editorial-container">
           <div class="section-label">Simple Setup</div>
@@ -2048,7 +2354,7 @@
     <!-- ============================================================
          6. INDUSTRY SHOWCASE ("WHO WAASZ IS BUILT FOR")
          ============================================================ -->
-    <section class="audience-section">
+    <section class="audience-section" id="industries">
       <div class="container">
         <div class="editorial-container" style="text-align: center; margin-bottom: 1.5rem;">
           <div class="section-label">Built for Your Industry</div>
@@ -2177,7 +2483,7 @@
     <!-- ============================================================
          7. STATUS / PRIVATE BETA
          ============================================================ -->
-    <section class="status-section">
+    <section class="status-section" id="beta">
       <div class="container">
         <div class="status-box">
           <span class="status-badge-inline">Testing Cohort Application</span>
@@ -2205,6 +2511,9 @@
               </svg>
             </a>
           </div>
+          <p class="beta-contact-note">
+            Have partnership or enterprise inquiries? Email <a href="mailto:info@waaszai.com">info@waaszai.com</a> or reach the founder directly at <a href="mailto:ndiezeifeanyi@waaszai.com">ndiezeifeanyi@waaszai.com</a>.
+          </p>
         </div>
       </div>
     </section>
@@ -2238,24 +2547,48 @@
   <!-- ============================================================
        9. FOOTER
        ============================================================ -->
-  <footer>
+  <footer id="contact">
     <div class="container footer-content">
       <div class="footer-brand-col">
         <div>
           <strong>Waasz AI</strong>, WhatsApp Financial Operating System for African MSMEs
         </div>
-        <a 
-          href="https://www.linkedin.com/company/waasz-ai/" 
-          class="footer-social-link"
-          target="_blank" 
-          rel="noopener noreferrer"
-          aria-label="Follow Waasz AI on LinkedIn"
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-          </svg>
-          <span>Follow Waasz AI on LinkedIn</span>
-        </a>
+        <div class="footer-social-row">
+          <a 
+            href="https://www.linkedin.com/company/waasz-ai/" 
+            class="footer-social-link"
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="Follow Waasz AI on LinkedIn"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+            </svg>
+            <span>Follow Waasz AI on LinkedIn</span>
+          </a>
+          <a 
+            href="mailto:info@waaszai.com" 
+            class="footer-social-link"
+            aria-label="Email Waasz AI Support at info@waaszai.com"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>info@waaszai.com</span>
+          </a>
+          <a 
+            href="mailto:ndiezeifeanyi@waaszai.com" 
+            class="footer-social-link"
+            aria-label="Email Founder at ndiezeifeanyi@waaszai.com"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>ndiezeifeanyi@waaszai.com</span>
+          </a>
+        </div>
       </div>
       <div class="footer-disclaimer">
         Waasz AI is an independent financial technology infrastructure built on the WhatsApp Business API. WhatsApp is a registered trademark of Meta Platforms, Inc.
@@ -2263,8 +2596,36 @@
     </div>
   </footer>
 
-  <!-- Mockup Tab Switching Script -->
+  <!-- Mockup Tab Switching & Mobile Menu Script -->
   <script>
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const btn = document.getElementById('mobile-menu-toggle');
+      const iconOpen = document.getElementById('menu-icon-open');
+      const iconClose = document.getElementById('menu-icon-close');
+      if (!drawer || !btn) return;
+      const isOpen = drawer.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (iconOpen && iconClose) {
+        iconOpen.style.display = isOpen ? 'none' : 'block';
+        iconClose.style.display = isOpen ? 'block' : 'none';
+      }
+    }
+
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const btn = document.getElementById('mobile-menu-toggle');
+      const iconOpen = document.getElementById('menu-icon-open');
+      const iconClose = document.getElementById('menu-icon-close');
+      if (!drawer || !btn) return;
+      drawer.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      if (iconOpen && iconClose) {
+        iconOpen.style.display = 'block';
+        iconClose.style.display = 'none';
+      }
+    }
+
     function switchMockupTab(tabIndex) {
       const tabs = document.querySelectorAll('.mockup-tab-btn');
       const panels = document.querySelectorAll('.chat-panel');
