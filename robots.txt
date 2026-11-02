@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://waasztech.vercel.app/sitemap.xml
+Sitemap: https://waaszai.com/sitemap.xml
